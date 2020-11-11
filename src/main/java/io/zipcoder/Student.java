@@ -35,10 +35,6 @@ public class Student {
         return this.lastName;
     }
 
-    public ArrayList<Double> getTestScores() {
-        return this.examScores;
-    }
-
     public Integer getNumberOfExamsTaken() {
         return this.examScores.size();
     }
@@ -50,7 +46,7 @@ public class Student {
 
         // append all scores into the StringBuilder
         for (Double examScore : this.examScores) {
-            formatListScores.format("Exam %d -> %0.2f%n", (this.examScores.indexOf(examScore)) + 1, examScore);
+            formatListScores.format("Exam %d -> %.02f%n", (this.examScores.indexOf(examScore)) + 1, examScore);
             // %d is integer, %f is floating point, %n line separator
         }
 
@@ -66,23 +62,21 @@ public class Student {
         this.examScores.set(examNum - 1, updatedScore);
     }
 
-    public Double getAverageExamScore() {
-        double count = this.examScores.size();
-        double sum = 0;
-        double answer = sum / count;
+    public double getAverageExamScore() {
+        double sum = 0.00;
 
         for (Double examScore : this.examScores) {
             sum += examScore;
         }
 
-        return answer;
+        return Math.round(sum / this.examScores.size());
     }
 
     @Override
     public String toString() {
         StringBuilder studentReport = new StringBuilder();
         Formatter formattedString = new Formatter(studentReport);
-        formattedString.format("Student Name: %s %n> Average Score: %s%n> Exam Scores:%n",
+        formattedString.format("Student Name: %s %s%n> Average Score: %s%n> Exam Scores:%n%s%n",
                 this.getFirstName(),
                 this.getLastName(),
                 this.getAverageExamScore(),
