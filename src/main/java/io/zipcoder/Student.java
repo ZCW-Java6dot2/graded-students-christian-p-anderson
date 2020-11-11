@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Formatter;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String firstName; // a collection of characters representative of a first name
     private String lastName; // a collection of characters representative of a last name
     private ArrayList<Double> examScores; // a dynamic collection of decimal values representative of test scores
@@ -84,5 +84,31 @@ public class Student {
                 );
 
         return studentReport.toString().trim();
+    }
+
+
+    /**
+     * we implemented the Comparable interface which causes us to define the compareTo() method. We need to compare
+     * one student to another based on average exam scores
+     *
+     * compareStudentTo is the object to be compared
+     * compareTo() returns a negative integer, zero, or a positive integer as this object is less than, equal to, or
+     * greater than the specified object.
+     */
+
+    @Override
+    public int compareTo(Student compareStudentTo) {
+        // -1 means what is on the left is less than what is on the right (our comparing value)
+        if (this.getAverageExamScore() > compareStudentTo.getAverageExamScore()) {
+            return -1;
+        }
+
+        // 1 means what is on the left is greater than what is on the right (our comparing value)
+        if (this.getAverageExamScore() < compareStudentTo.getAverageExamScore()) {
+            return 1;
+        }
+
+        // means that the exam scores are equal, so do a string comparison of last name
+        return this.getLastName().compareTo(compareStudentTo.getLastName());
     }
 }
