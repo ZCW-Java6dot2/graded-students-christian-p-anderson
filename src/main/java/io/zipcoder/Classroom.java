@@ -1,7 +1,8 @@
 package io.zipcoder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+import java.util.*;
 
 public class Classroom {
 
@@ -74,7 +75,24 @@ public class Classroom {
            this.students = studentsList.toArray(this.students);
            return true;
        }
+    }
 
+    /**
+     *
+     * convert the this.students array into an ArrayList. Use Collections to sort the ArrayList. Return the array
+     *
+     * using the Collections.sort returned an error. Found the reason in the site referenced below:
+     * https://beginnersbook.com/2013/12/java-arraylist-of-object-sort-example-comparable-and-comparator/
+     *
+     */
+    public Student[] getStudentsByScore() {
+        ArrayList<Student> studentsList = new ArrayList<>(Arrays.asList(this.students));
+
+        Collections.sort(studentsList);
+
+        return studentsList.toArray(this.students);
 
     }
+
+//    public void getGradeBook
 }
