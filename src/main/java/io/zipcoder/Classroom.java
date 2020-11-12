@@ -1,7 +1,5 @@
 package io.zipcoder;
 
-//import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.*;
 
 public class Classroom {
@@ -89,10 +87,74 @@ public class Classroom {
         ArrayList<Student> studentsList = new ArrayList<>(Arrays.asList(this.students));
 
         Collections.sort(studentsList);
+        Collections.reverse(studentsList);
 
         return studentsList.toArray(this.students);
 
     }
 
-//    public void getGradeBook
+    public HashMap getGradeBook() {
+        double avgScore = getAverageExamScore();
+        HashMap<Student, String> map = new HashMap<>();
+
+        for (Student student : this.students) {
+
+            if (student.getAverageExamScore() > 0) {
+                double studentPercentile = student.getAverageExamScore()/avgScore;
+                String grade = "";
+
+                if (studentPercentile >= 0.91) {
+                    grade = "A";
+                } else if (studentPercentile >= 0.72 && studentPercentile <= 0.90) {
+                    grade = "B";
+                } else if (studentPercentile >= 0.51 && studentPercentile <= 0.71) {
+                    grade = "C";
+                } else if (studentPercentile >= 0.12 && studentPercentile <= 0.50) {
+                    grade = "D";
+                } else if (studentPercentile >= 0.00 && studentPercentile <= 0.11) {
+                    grade = "F";
+                }
+
+
+
+                map.put(student, grade);
+            }
+        }
+
+        return map;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

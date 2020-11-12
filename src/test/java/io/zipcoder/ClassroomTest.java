@@ -3,6 +3,8 @@ package io.zipcoder;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 public class ClassroomTest {
 
     @Test
@@ -106,10 +108,35 @@ public class ClassroomTest {
         testClassroom.addStudent(jane);
         testClassroom.addStudent(john);
         testClassroom.addStudent(lori);
-        Student[] expected = {john, jane, lori};
+        Student[] expected = {lori, jane, john};
 
         // Then
         Student[] actual = testClassroom.getStudentsByScore();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getGradeBookTest() {
+        // Given
+        Double[] janeScores = {80.0, 82.0};
+        Double[] johnScores = {51.0, 52.0};
+        Double[] loriScores = {21.0, 25.0};
+        Student jane = new Student("Jane", "Doe", janeScores);
+        Student john = new Student("John", "Doe", johnScores);
+        Student lori = new Student("Lori", "Doe", loriScores);
+        Classroom testClassroom = new Classroom(3);
+
+        // When
+        testClassroom.addStudent(jane);
+        testClassroom.addStudent(john);
+        testClassroom.addStudent(lori);
+        HashMap<Student, String> expected = new HashMap<>();
+        expected.put(john, "A");
+        expected.put(jane, "A");
+        expected.put(lori, "D");
+
+        // Then
+        HashMap<Student, String> actual = testClassroom.getGradeBook();
         Assert.assertEquals(expected, actual);
     }
 
